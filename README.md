@@ -1,2 +1,2 @@
-# milsim
+# Milsim
 WIP homepage
