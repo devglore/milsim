@@ -1,4 +1,29 @@
-<?php require_once('include/init.php'); ?>
+<?php require_once('include/init.php');
+unset ($_SESSION['missing']);
+    unset ($_SESSION['errors']);
+
+    if(filter_has_var(INPUT_GET, 'op')){
+        $required = array('op');
+        $validate = new Pos_Validator($required, 'get');
+        $validate->isInt('op');
+        $filtered = $validate->validateInput();
+        $missing = $validate->getMissing();
+        $errors = $validate->getErrors();
+        if(!$missing && !$errors) {
+            $operation = operation::getOP($filtered['op']);
+        } else {
+            $_SESSION['missing'][] = $missing;
+            $_SESSION['errors'][] = $errors;
+            $_SESSION['CantFindOP'] = 'true';
+            header('Location: manage.php');
+        }
+    } else {
+
+        //TODO get latest op and display it
+    }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,12 +121,10 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="page-header">
-                            <h3>Operation Title<small>posted 10 July 2015 by Glore</small></h3>
+                            <h3><?php if(isset($operation)){ echo $operation['opTitle']; } ?> <small>posted 10 July 2015 by Glore</small></h3>
                         </div>
                         <img class="featureImg img-thumbnail" src="http://dummyimage.com/800x275/4d494d/686a82.gif&text=testing" alt="testing">
-                        <p>LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper. Sed tempor eros sit amet libero varius auctor. Sed at scelerisque enim. Maecenas blandit leo quis erat fringilla feugiat. Etiam at ante mauris. Curabitur justo ex, suscipit sed nibh eget, ultrices commodo orci. Nulla pharetra feugiat velit quis porta. Nunc a mattis leo. Ut eu rutrum augue, quis tincidunt lacus. Phasellus a nulla lectus. Etiam dignissim rutrum erat eget dapibus.</p>
-                        <h4>Under attack</h4>
-                        <p>LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper. Sed tempor eros sit amet libero varius auctor. Sed at scelerisque enim. Maecenas blandit leo quis erat fringilla feugiat. Etiam at ante mauris. Curabitur justo ex, suscipit sed nibh eget, ultrices commodo orci. Nulla pharetra feugiat velit quis porta. Nunc a mattis leo. Ut eu rutrum augue, quis tincidunt lacus. Phasellus a nulla lectus. Etiam dignissim rutrum erat eget dapibus.</p>
+                        <?php if(isset($operation)) { echo $operation['opDesc']; }  ?>
                     </div>
                 </div>
             </div>
@@ -113,13 +136,9 @@
                         $data = getOps();
                         
                         for($i = 0; $i < count($data); $i++) {
-<<<<<<< HEAD
                             $content = '<a href="manage.php?op='. $data[$i]['id'] .'" class="list-group-item">';
-=======
-                            $content = '<a href="manage.php?op=1" class="list-group-item">';
->>>>>>> 438bfe11f2c28acbefa835d9bfa3be6ff514dbc0
                             $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
-                            $content .= '<p class="list-group-item-text">'. substr($data[$i]['opDesc'], 0, 25) .'</p>';
+                            $content .= '<p class="list-group-item-text">'. strip_tags(substr($data[$i]['opDesc'], 0, 25)) .'</p>';
                             $content .= '</a>';
 							echo $content;
                         }
@@ -127,38 +146,6 @@
                 </div>
             </div>
             <!-- END SIDEBAR -->
-            
-                <?php
-                
-                
-                
-                
-                /*old way
-                    $data = getOps();
-                    for($i = 0; $i < count($data); $i++) {
-
-                        echo '<h3>'.$data[$i]['opTitle'].'</h3>';
-                        $fireteams = getFT($data[$i]['id']);
-
-                        foreach ( $fireteams as $team ) {
-                            echo '<ul>';
-
-                            echo '<li><h4>'. $team['callsign'].'</h4>';
-                                echo '<ul>';
-                                    echo '<li>'. $team['member1'] .'</li>';
-                                    echo '<li>'. $team['member2'] .'</li>';
-                                    echo '<li>'. $team['member3'] .'</li>';
-                                    echo '<li>'. $team['member4'] .'</li>';
-                                echo '</ul>';
-
-                            echo '</li>';
-
-                            echo '</ul>';
-                        }
-                    }
-                    
-                    */
-                ?>
             </div>
         </div>
 
@@ -194,7 +181,6 @@
         </div>
     </div>
     <!-- END REGISTER MODAL -->
-
     <!-- FOOTER  -->
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
