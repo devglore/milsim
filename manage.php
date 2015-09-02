@@ -124,7 +124,7 @@ unset ($_SESSION['missing']);
                             <h3><?php if(isset($operation)){ echo $operation['opTitle']; } ?> <small>posted 10 July 2015 by Glore</small></h3>
                         </div>
                         <img class="featureImg img-thumbnail" src="http://dummyimage.com/800x275/4d494d/686a82.gif&text=testing" alt="testing">
-                        <?php if(isset($operation)) { echo html_entity_decode($operation['opDesc']); }  ?>
+                        <?php if(isset($operation)) { echo strip_tags(html_entity_decode($operation['opDesc']), '<p><h4><small><strong>'); }  ?>
                     </div>
                 </div>
             </div>
