@@ -113,7 +113,11 @@
                         $data = getOps();
                         
                         for($i = 0; $i < count($data); $i++) {
+<<<<<<< HEAD
                             $content = '<a href="manage.php?op='. $data[$i]['id'] .'" class="list-group-item">';
+=======
+                            $content = '<a href="manage.php?op=1" class="list-group-item">';
+>>>>>>> 438bfe11f2c28acbefa835d9bfa3be6ff514dbc0
                             $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
                             $content .= '<p class="list-group-item-text">'. substr($data[$i]['opDesc'], 0, 25) .'</p>';
                             $content .= '</a>';
