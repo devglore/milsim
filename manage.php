@@ -112,11 +112,12 @@
                     <?php 
                         $data = getOps();
                         
-                        for($i = 0; $ < count($data); $i++) {
-                            echo '<a href="manage.php?op='. $data['id'] .'" class="list-group-item">';
-                            echo '<h4 class="list-group-item-heading">'. $data['opTitle'] .'</h4>';
-                            echo '<p class="list-group-item-text">'. substr($data['opDesc'], 0, 25) .'</p>';
-                            echo '</a>';
+                        for($i = 0; $i < count($data); $i++) {
+                            $content = '<a href="manage.php?op=1" class="list-group-item">';
+                            $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
+                            $content .= '<p class="list-group-item-text">'. substr($data[$i]['opDesc'], 0, 25) .'</p>';
+                            $content .= '</a>';
+							echo $content;
                         }
                     ?>
                 </div>
