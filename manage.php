@@ -138,7 +138,7 @@ unset ($_SESSION['missing']);
                         for($i = 0; $i < count($data); $i++) {
                             $content = '<a href="manage.php?op='. $data[$i]['id'] .'" class="list-group-item">';
                             $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
-                            $content .= '<p class="list-group-item-text">'. strip_tags(substr($data[$i]['opDesc'], 0, 25)) .'</p>';
+                            $content .= '<p class="list-group-item-text">'. strip_tags(substr($data[$i]['opDesc'], 0, 100)) .'...</p>';
                             $content .= '</a>';
 							echo $content;
                         }
