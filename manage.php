@@ -124,7 +124,7 @@ unset ($_SESSION['missing']);
                             <h3><?php if(isset($operation)){ echo $operation['opTitle']; } ?> <small>posted 10 July 2015 by Glore</small></h3>
                         </div>
                         <img class="featureImg img-thumbnail" src="http://dummyimage.com/800x275/4d494d/686a82.gif&text=testing" alt="testing">
-                        <?php if(isset($operation)) { echo $operation['opDesc']; }  ?>
+                        <?php if(isset($operation)) { echo html_entity_decode($operation['opDesc']); }  ?>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ unset ($_SESSION['missing']);
                         for($i = 0; $i < count($data); $i++) {
                             $content = '<a href="manage.php?op='. $data[$i]['id'] .'" class="list-group-item">';
                             $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
-                            $content .= '<p class="list-group-item-text">'. strip_tags(substr($data[$i]['opDesc'], 0, 100)) .'...</p>';
+                            $content .= '<p class="list-group-item-text">'. strip_tags(html_entity_decode(substr($data[$i]['opDesc'], 0, 100))) .'...</p>';
                             $content .= '</a>';
 							echo $content;
                         }
