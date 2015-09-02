@@ -1,6 +1,4 @@
-<?php
-    require_once('include/init.php');
-?>
+<?php require_once('include/init.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,8 +92,43 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="page-header">
+                            <h3>Operation Title<small>posted 10 July 2015 by Glore</small></h3>
+                        </div>
+                        <img class="featureImg img-thumbnail" src="http://dummyimage.com/800x275/4d494d/686a82.gif&text=testing" alt="testing">
+                        <p>LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper. Sed tempor eros sit amet libero varius auctor. Sed at scelerisque enim. Maecenas blandit leo quis erat fringilla feugiat. Etiam at ante mauris. Curabitur justo ex, suscipit sed nibh eget, ultrices commodo orci. Nulla pharetra feugiat velit quis porta. Nunc a mattis leo. Ut eu rutrum augue, quis tincidunt lacus. Phasellus a nulla lectus. Etiam dignissim rutrum erat eget dapibus.</p>
+                        <h4>Under attack</h4>
+                        <p>LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper. Sed tempor eros sit amet libero varius auctor. Sed at scelerisque enim. Maecenas blandit leo quis erat fringilla feugiat. Etiam at ante mauris. Curabitur justo ex, suscipit sed nibh eget, ultrices commodo orci. Nulla pharetra feugiat velit quis porta. Nunc a mattis leo. Ut eu rutrum augue, quis tincidunt lacus. Phasellus a nulla lectus. Etiam dignissim rutrum erat eget dapibus.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SIDEBAR -->
+            <div class="col-lg-3">
+                <div class="list-group">
+                    <?php 
+                        $data = getOps();
+                        
+                        foreach ($data as $op) {
+                            echo '<a href="manage.php?op="'. $op['id'] .' class="list-group-item">';
+                                echo '<h4 class="list-group-item-heading">'. $op['opTitle'] .'</h4>';
+                                echo '<p class="list-group-item-text">'. substr($op['opDesc'], 0, 25) .'</p>';
+                            echo '</a>';
+                        }
+                    ?>
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            
                 <?php
+                
+                
+                
+                
+                /*old way
                     $data = getOps();
                     for($i = 0; $i < count($data); $i++) {
 
@@ -118,10 +151,11 @@
                             echo '</ul>';
                         }
                     }
+                    
+                    */
                 ?>
             </div>
         </div>
-    </div>
 
     <!-- REGISTER MODAL -->
     <div class="modal fade" id="registerModal" role="dialog">
