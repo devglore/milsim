@@ -66,4 +66,19 @@ class operation {
             }
         }
     }
+
+    public static function getOP($id) {
+        global $database;
+        $query = 'SELECT * FROM operations WHERE id = ?';
+        $stmt = $database->connection->stmt_init();
+        if(!$stmt->prepare($query)){
+            echo 'Could not prepare statement:'.$database->connection->connect_errno;
+        } else {
+            $stmt->bind_param('s', $id);
+            $stmt->execute();
+                $result = $stmt->get_result();
+                $result = $result->fetch_assoc();
+                return $result;
+        }
+    }
 }
