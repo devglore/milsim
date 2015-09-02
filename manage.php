@@ -113,9 +113,9 @@
                         $data = getOps();
                         
                         foreach ($data as $op) {
-                            echo '<a href="manage.php?op="'. $op['id'] .'" class="list-group-item">';
-                                echo '<h4 class="list-group-item-heading">'. $op['opTitle'] .'</h4>';
-                                echo '<p class="list-group-item-text">'. substr($op['opDesc'], 0, 25) .'</p>';
+                            echo '<a href="manage.php?op='. $op['id'] .'" class="list-group-item">';
+                            echo '<h4 class="list-group-item-heading">'. $op['opTitle'] .'</h4>';
+                            echo '<p class="list-group-item-text">'. substr($op['opDesc'], 0, 25) .'</p>';
                             echo '</a>';
                         }
                     ?>
