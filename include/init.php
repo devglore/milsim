@@ -12,3 +12,4 @@
     require_once('fireteam.php');
     require_once('operation.php');
     require_once('validator.php');
+    require_once('functions.php');

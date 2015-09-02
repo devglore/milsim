@@ -1,42 +1,5 @@
 <?php
     require_once('include/init.php');
-    global $database;
-    $query = "SELECT * FROM operations";
-
-    $stmt = $database->connection->stmt_init();
-    if(!$stmt->prepare($query)) {
-        echo 'Det gick inte att förbereda statement.';
-    } else {
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-
-        while ( $opData = $result->fetch_assoc() ) {
-            //do sessionlogin
-            $data[] = $opData;
-        }
-    }
-
-    function getFT($id){
-        global $database;
-        $query = "SELECT * FROM fireteams WHERE opID = ? ORDER BY id";
-
-        $stmt = $database->connection->stmt_init();
-        if(!$stmt->prepare($query)) {
-            echo 'Det gick inte att förbereda statement.';
-        } else {
-            $stmt->bind_param('i',$id );
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-
-            while ( $ftData = $result->fetch_assoc() ) {
-                //do sessionlogin
-                $firedata[] = $ftData;
-            }
-        }
-        return $firedata;
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,6 +96,7 @@
         <div class="row">
             <div class="col-md-12">
                 <?php
+                    $data = getOps();
                     for($i = 0; $i < count($data); $i++) {
 
                         echo '<h3>'.$data[$i]['opTitle'].'</h3>';
