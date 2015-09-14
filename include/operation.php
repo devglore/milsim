@@ -81,4 +81,18 @@ class operation {
                 return $result;
         }
     }
+    
+    public static function getLatestOP() {
+        global $database;
+        $query = "SELECT * FROM operations ORDER BY id DESC LIMIT 1";
+        $stmt = $database->connection->stmt_init();
+        if(!$stmt->prepare($query)) {
+            echo 'Could not prepare statement:' .$database->connection->connect_errno;
+        } else {
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $result = $result->fetch_assoc();
+            return $result;
+        }
+    }
 }

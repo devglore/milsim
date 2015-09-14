@@ -19,7 +19,7 @@ unset ($_SESSION['missing']);
         }
     } else {
 
-        //TODO get latest op and display it
+        $operation = operation::getLatestOP();
     }
 
 
