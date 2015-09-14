@@ -1,22 +1,48 @@
+<?php require_once('include/init.php');
+unset ($_SESSION['missing']);
+    unset ($_SESSION['errors']);
+
+    if(filter_has_var(INPUT_GET, 'op')){
+        $required = array('op');
+        $validate = new Pos_Validator($required, 'get');
+        $validate->isInt('op');
+        $filtered = $validate->validateInput();
+        $missing = $validate->getMissing();
+        $errors = $validate->getErrors();
+        if(!$missing && !$errors) {
+            $operation = operation::getOP($filtered['op']);
+        } else {
+            $_SESSION['missing'][] = $missing;
+            $_SESSION['errors'][] = $errors;
+            $_SESSION['CantFindOP'] = 'true';
+            header('Location: manage.php');
+        }
+    } else {
+
+        $operation = operation::getLatestOP();
+    }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>MIL-SIM</title>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>MIL-SIM - <?php if(isset($operation)){ echo $operation['opTitle']; } ?></title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tweaks to Bootstrap -->
     <link href="css/extras.css" rel="stylesheet">
-    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -61,24 +87,24 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
                         <div class="panel panel-default dropdown-menu loginPanel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Login</h3>
                             </div>
                             <div class="panel-body">
                                 <form action="login.php" method="POST" role="form">
-                                <div class="form-group">
-                                    <label for="username" class="sr-only">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Username">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="sr-only">Password</label>
-                                    <input type="Password" class="form-control" id="Password" placeholder="Password">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="username" class="sr-only">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="sr-only">Password</label>
+                                        <input type="Password" class="form-control" id="Password" placeholder="Password">
+                                    </div>
 
-                                <button type="submit" class="btn btn-info">Login</button>
-                            </form>
+                                    <button type="submit" class="btn btn-info">Login</button>
+                                </form>
                             </div>
                         </div>
                     </li>
@@ -88,19 +114,17 @@
         </div><!-- /.container-fluid -->
     </nav>
     <!-- END HEADER NAV -->
-    <!-- CONTAINER -->
+
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="page-header">
-                            <h3>OP Overlord Chapter 2 <small>posted 10 July 2015 by Glore</small></h3>
+                            <h3><?php if(isset($operation)){ echo $operation['opTitle']; } ?> <small>posted 10 July 2015 by Glore</small></h3>
                         </div>
                         <img class="featureImg img-thumbnail" src="http://dummyimage.com/800x275/4d494d/686a82.gif&text=testing" alt="testing">
-                        <p>LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper. Sed tempor eros sit amet libero varius auctor. Sed at scelerisque enim. Maecenas blandit leo quis erat fringilla feugiat. Etiam at ante mauris. Curabitur justo ex, suscipit sed nibh eget, ultrices commodo orci. Nulla pharetra feugiat velit quis porta. Nunc a mattis leo. Ut eu rutrum augue, quis tincidunt lacus. Phasellus a nulla lectus. Etiam dignissim rutrum erat eget dapibus.</p>
-                        <h4>Under attack</h4>
-                        <p>LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper. Sed tempor eros sit amet libero varius auctor. Sed at scelerisque enim. Maecenas blandit leo quis erat fringilla feugiat. Etiam at ante mauris. Curabitur justo ex, suscipit sed nibh eget, ultrices commodo orci. Nulla pharetra feugiat velit quis porta. Nunc a mattis leo. Ut eu rutrum augue, quis tincidunt lacus. Phasellus a nulla lectus. Etiam dignissim rutrum erat eget dapibus.</p>
+                        <?php if(isset($operation)) { echo strip_tags(html_entity_decode($operation['opDesc']), '<p><h4><small><strong>'); }  ?>
                     </div>
                 </div>
             </div>
@@ -108,39 +132,23 @@
             <!-- SIDEBAR -->
             <div class="col-lg-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">OP Gunsmoke</h4>
-                        <p class="list-group-item-text">LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper...</p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">OP Gunsmoke</h4>
-                        <p class="list-group-item-text">LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper...</p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">OP Gunsmoke</h4>
-                        <p class="list-group-item-text">LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper...</p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">OP Gunsmoke</h4>
-                        <p class="list-group-item-text">LoremLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim in nibh non semper...</p>
-                    </a>
+                    <?php 
+                        $data = getOps();
+                        
+                        for($i = 0; $i < count($data); $i++) {
+                            $content = '<a href="manage.php?op='. $data[$i]['id'] .'" class="list-group-item">';
+                            $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
+                            $content .= '<p class="list-group-item-text">'. strip_tags(html_entity_decode(substr($data[$i]['opDesc'], 0, 100))) .'...</p>';
+                            $content .= '</a>';
+							echo $content;
+                        }
+                    ?>
                 </div>
             </div>
             <!-- END SIDEBAR -->
-
+            </div>
         </div>
-    </div>
-    <!-- END CONTAINER -->
 
-    <!-- FOOTER  -->
-    <div class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-            <a class="navbar-text" href="http://www.malven.se">Powered by Malven.se.</a>
-            <a class="navbar-btn btn-info btn pull-right" href="index.php">Join us</a>
-        </div>
-    </div>
-    <!-- END FOOTER -->
-    
     <!-- REGISTER MODAL -->
     <div class="modal fade" id="registerModal" role="dialog">
         <div class="modal-dialog">
@@ -173,6 +181,13 @@
         </div>
     </div>
     <!-- END REGISTER MODAL -->
+    <!-- FOOTER  -->
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <a class="navbar-text" href="http://www.malven.se">Powered by Malven.se.</a>
+            <a class="navbar-btn btn-info btn pull-right" href="index.php">Join us</a>
+        </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
