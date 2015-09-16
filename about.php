@@ -1,29 +1,3 @@
-<?php require_once('include/init.php');
-unset ($_SESSION['missing']);
-    unset ($_SESSION['errors']);
-
-    if(filter_has_var(INPUT_GET, 'op')){
-        $required = array('op');
-        $validate = new Pos_Validator($required, 'get');
-        $validate->isInt('op');
-        $filtered = $validate->validateInput();
-        $missing = $validate->getMissing();
-        $errors = $validate->getErrors();
-        if(!$missing && !$errors) {
-            $operation = operation::getOP($filtered['op']);
-        } else {
-            $_SESSION['missing'][] = $missing;
-            $_SESSION['errors'][] = $errors;
-            $_SESSION['CantFindOP'] = 'true';
-            header('Location: manage.php');
-        }
-    } else {
-
-        $operation = operation::getLatestOP();
-    }
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +5,7 @@ unset ($_SESSION['missing']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>MIL-SIM - <?php if(isset($operation)){ echo $operation['opTitle']; } ?></title>
+    <title>MIL-SIM - About us</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -117,35 +91,22 @@ unset ($_SESSION['missing']);
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="page-header">
-                            <h3><?php if(isset($operation)){ echo $operation['opTitle']; } ?> <small>posted 10 July 2015 by Glore</small></h3>
+                            <h3>About us <small>posted 10 July 2015 by Glore</small></h3>
                         </div>
-                        <img class="featureImg img-thumbnail" src="http://dummyimage.com/800x275/4d494d/686a82.gif&text=testing" alt="testing">
-                        <?php if(isset($operation)) { echo strip_tags(html_entity_decode($operation['opDesc']), '<p><h4><small><strong>'); }  ?>
+                        <img class="featureImg img-thumbnail" src="http://dummyimage.com/960x275/4d494d/686a82.gif&text=testing" alt="testing">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- SIDEBAR -->
-            <div class="col-lg-3">
-                <div class="list-group">
-                    <?php 
-                        $data = getOps();
-                        
-                        for($i = 0; $i < count($data); $i++) {
-                            $content = '<a href="manage.php?op='. $data[$i]['id'] .'" class="list-group-item">';
-                            $content .= '<h4 class="list-group-item-heading">'. $data[$i]['opTitle'] .'</h4>';
-                            $content .= '<p class="list-group-item-text">'. strip_tags(html_entity_decode(substr($data[$i]['opDesc'], 0, 100))) .'...</p>';
-                            $content .= '</a>';
-							echo $content;
-                        }
-                    ?>
-                </div>
-            </div>
-            <!-- END SIDEBAR -->
             </div>
         </div>
 
