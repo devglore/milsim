@@ -1,3 +1,6 @@
+<?php 
+    require_once('include/init.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,18 +70,32 @@
                                 <h3 class="panel-title">Login</h3>
                             </div>
                             <div class="panel-body">
-                                <form action="login.php" method="POST" role="form">
-                                    <div class="form-group">
-                                        <label for="username" class="sr-only">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password" class="sr-only">Password</label>
-                                        <input type="Password" class="form-control" id="Password" placeholder="Password">
-                                    </div>
+                                <?php
+                                    if(!isset($_SESSION['steamid'])) {
+                                    
+                                        echo "welcome guest! please login \n \n";
+                                        echo steamlogin(); //login button
+                                        
+                                    }  else {
+                                        //Protected content
+                                        echo "Welcome back " . $steamprofile['personaname'] . "</br>";
+                                        echo "here is your avatar: </br>" . '<img src="'.$steamprofile['avatarfull'].'" title="" alt="" />'; // Display their avatar!
+                                        
+                                        logoutbutton();
+                                    }    
+                                ?>
+                                <!--<form action="login.php" method="POST" role="form">-->
+                                <!--    <div class="form-group">-->
+                                <!--        <label for="username" class="sr-only">Username</label>-->
+                                <!--        <input type="text" class="form-control" id="username" placeholder="Username">-->
+                                <!--    </div>-->
+                                <!--    <div class="form-group">-->
+                                <!--        <label for="password" class="sr-only">Password</label>-->
+                                <!--        <input type="Password" class="form-control" id="Password" placeholder="Password">-->
+                                <!--    </div>-->
 
-                                    <button type="submit" class="btn btn-info">Login</button>
-                                </form>
+                                <!--    <button type="submit" class="btn btn-info">Login</button>-->
+                                <!--</form>-->
                             </div>
                         </div>
                     </li>
