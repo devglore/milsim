@@ -73,7 +73,7 @@
                                 <?php
                                     if(!isset($_SESSION['steamid'])) {
                                     
-                                        echo "welcome guest! please login \n \n";
+                                        echo "<p>Welcome Guest! Please login</p>";
                                         echo steamlogin(); //login button
                                         
                                     }  else {
