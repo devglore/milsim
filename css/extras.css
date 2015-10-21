@@ -18,14 +18,14 @@ body {
 
 .loginPanel {
     padding-top: 0; !Important
-    width: 225px; !Important
+    width: 225px;
 }
 
 .loginPanel .panel-body {
     padding-top: 15px; !Important
 }
 
-.loginPanel form button {
+.loginPanel form input {
     margin-top: 1em; !Important
 }
 
