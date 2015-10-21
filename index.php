@@ -79,8 +79,8 @@
                                     }  else {
                                         include('include/steamauth/userInfo.php');
                                         //Protected content
-                                        echo "Welcome back " . $steamprofile['personaname'] . "</br>";
-                                        echo "here is your avatar: </br>" . '<img src="'.$steamprofile['avatarfull'].'" title="" alt="" />'; // Display their avatar!
+                                        echo "<p class='panel-content'>Welcome back " . $steamprofile['personaname'] . "</p>";
+                                        echo "here is your avatar: </br>" . '<img src="'.$steamprofile['avatarfull'].'" title="" alt="'. $steamprofile['personaname'] .'" />'; // Display their avatar!
                                         
                                         logoutbutton();
                                     }    
