@@ -77,6 +77,7 @@
                                         echo steamlogin(); //login button
                                         
                                     }  else {
+                                        include('include/steamauth/userInfo.php');
                                         //Protected content
                                         echo "Welcome back " . $steamprofile['personaname'] . "</br>";
                                         echo "here is your avatar: </br>" . '<img src="'.$steamprofile['avatarfull'].'" title="" alt="" />'; // Display their avatar!
