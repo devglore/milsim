@@ -1,8 +1,6 @@
 <?php 
 require_once('init.php');
 
-
-
 //Get fireteam from operation id
 function getFT($id){
     global $database;
@@ -38,7 +36,6 @@ function getOps(){
     } else {
         $stmt->execute();
         $result = $stmt->get_result();
-
 
         while ( $opData = $result->fetch_assoc() ) {
             //do sessionlogin
