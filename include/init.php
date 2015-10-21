@@ -13,4 +13,4 @@
     require_once('operation.php');
     require_once('validator.php');
     require_once('functions.php');
-    require_once('../steamauth/steamauth.php');
+    require_once('steamauth/steamauth.php');
