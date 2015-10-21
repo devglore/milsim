@@ -65,7 +65,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
-                        <div class="panel panel-default dropdown-menu loginPanel">
+                        <div id="loginDiv" class="panel panel-default dropdown-menu loginPanel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Login</h3>
                             </div>

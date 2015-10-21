@@ -18,6 +18,9 @@ body {
 
 .loginPanel {
     padding-top: 0; !Important
+}
+
+#loginDiv {
     width: 225px;
 }
 
