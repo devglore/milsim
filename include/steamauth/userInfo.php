@@ -19,8 +19,8 @@
     	       } else {
     	           $_SESSION['steam_realname'] = "Real name not given";
             }
-            $_SESSION['steam_primaryclanid'] = $content['response']['players'][0]['primaryclanid'];
-            $_SESSION['steam_timecreated'] = $content['response']['players'][0]['timecreated'];
+            // $_SESSION['steam_primaryclanid'] = $content['response']['players'][0]['primaryclanid'];
+            // $_SESSION['steam_timecreated'] = $content['response']['players'][0]['timecreated'];
             $_SESSION['steam_uptodate'] = true;
         }
         $steamprofile['steamid'] = $_SESSION['steam_steamid'];
