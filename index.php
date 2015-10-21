@@ -80,9 +80,9 @@
                                         include('include/steamauth/userInfo.php');
                                         //Protected content
                                         echo "<p class='panel-content'>Welcome back " . $steamprofile['personaname'] . "</p>";
-                                        echo "here is your avatar: </br>" . '<img src="'.$steamprofile['avatarfull'].'" title="" alt="'. $steamprofile['personaname'] .'" />'; // Display their avatar!
+                                        echo '<img class="img-thumbnail" src="'.$steamprofile['avatarfull'].'" title="" alt="'. $steamprofile['personaname'] .'" />'; // Display their avatar!
                                         
-                                        logoutbutton();
+                                        echo '<p>'.logoutbutton().'</p>';
                                     }    
                                 ?>
                                 <!--<form action="login.php" method="POST" role="form">-->
