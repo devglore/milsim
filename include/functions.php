@@ -28,7 +28,7 @@ function getFT($id){
 function getOps(){
     global $database;
     
-    $query = "SELECT * FROM operations";
+    $query = "SELECT * FROM operations order by id DESC";
 
     $stmt = $database->connection->stmt_init();
     if(!$stmt->prepare($query)) {

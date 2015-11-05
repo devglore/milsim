@@ -20,9 +20,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
+</head>    
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -38,7 +38,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.php">News <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="index.php">News <span class="sr-only">(current)</span></a></li>
                     <li><a href="about.php">About us</a></li>
                     <li><a href="phpBB3/">Forum</a></li>
                     <li class="dropdown">
@@ -85,22 +85,9 @@
                                         echo '<p>'.logoutbutton().'</p>';
                                     }    
                                 ?>
-                                <!--<form action="login.php" method="POST" role="form">-->
-                                <!--    <div class="form-group">-->
-                                <!--        <label for="username" class="sr-only">Username</label>-->
-                                <!--        <input type="text" class="form-control" id="username" placeholder="Username">-->
-                                <!--    </div>-->
-                                <!--    <div class="form-group">-->
-                                <!--        <label for="password" class="sr-only">Password</label>-->
-                                <!--        <input type="Password" class="form-control" id="Password" placeholder="Password">-->
-                                <!--    </div>-->
-
-                                <!--    <button type="submit" class="btn btn-info">Login</button>-->
-                                <!--</form>-->
                             </div>
                         </div>
                     </li>
-                    <li><a href="#registerModal" data-toggle="modal">Register</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -151,42 +138,8 @@
             </div>
         </div>
     </div>
-
-    <!-- REGISTER MODAL -->
-    <div class="modal fade" id="registerModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Register</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="register.php" method="POST" role="form">
-                        <div class="form-group">
-                            <label for="r_username" class="sr-only">Username: </label>
-                            <input type="text" class="form-control" id="r_username" placeholder="Username">
-                        </div>
-                        <div class="form-group">
-                            <label for="r_password" class="sr-only">Password: </label>
-                            <input type="password" class="form-control" id="r_password" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="r_email" class="sr-only">Email: </label>
-                            <input type="text" class="form-control" id="r_email" placeholder="Email">
-                        </div>
-                        <button type="submit" class="btn btn-warning">Register</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- ERROR MSG GOES HERE -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END REGISTER MODAL -->
-
     <!-- FOOTER  -->
-    <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="navbar navbar-default footer">
         <div class="container">
             <a class="navbar-text" href="http://www.malven.se">Powered by Malven.se.</a>
             <a class="navbar-btn btn-info btn pull-right" href="index.php">Join us</a>

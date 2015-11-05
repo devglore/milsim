@@ -1,9 +1,12 @@
-body {
-	margin-bottom: 80px;
-}
+body { padding-top: 70px; }
 
 .page-header {
 	margin-top: 0;
+}
+
+.footer {
+    margin-top: 3em;
+    margin-bottom: 0;
 }
 
 .panel-body {

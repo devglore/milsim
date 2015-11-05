@@ -19,8 +19,8 @@
     	       } else {
     	           $_SESSION['steam_realname'] = "Real name not given";
             }
-            // $_SESSION['steam_primaryclanid'] = $content['response']['players'][0]['primaryclanid'];
-            // $_SESSION['steam_timecreated'] = $content['response']['players'][0]['timecreated'];
+            //$_SESSION['steam_primaryclanid'] = $content['response']['players'][0]['primaryclanid'];
+            //$_SESSION['steam_timecreated'] = $content['response']['players'][0]['timecreated'];
             $_SESSION['steam_uptodate'] = true;
         }
         $steamprofile['steamid'] = $_SESSION['steam_steamid'];
@@ -34,8 +34,8 @@
         $steamprofile['avatarfull'] = $_SESSION['steam_avatarfull'];
         $steamprofile['personastate'] = $_SESSION['steam_personastate'];
         $steamprofile['realname'] = $_SESSION['steam_realname'];
-        $steamprofile['primaryclanid'] = $_SESSION['steam_primaryclanid'];
-        $steamprofile['timecreated'] = $_SESSION['steam_timecreated'];
+        //$steamprofile['primaryclanid'] = $_SESSION['steam_primaryclanid'];
+        //$steamprofile['timecreated'] = $_SESSION['steam_timecreated'];
 
     }
 ?>
